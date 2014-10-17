@@ -1,9 +1,25 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class Starfield extends PApplet {
+
 int normLength = 200;
 Particle[] chubz = new Particle[normLength];
 boolean scatter = false;
 boolean clock = false;
 
-void setup()
+public void setup()
 {
 	background(0);
 	size(300,300);
@@ -25,7 +41,7 @@ void setup()
 	chubz[normLength-1] = new OddballParticle();*/
 
 }
-void draw()
+public void draw()
 {
 	//background(0);
 	//ellipse(150, 150, 200, 200);
@@ -36,7 +52,7 @@ void draw()
 	}
 }
 
-void keyPressed()
+public void keyPressed()
 {
 	if(key == '0')
 	{
@@ -63,7 +79,7 @@ class NormalParticle implements Particle
 	{
 		centerX = 150;
 		centerY = 250;
-		distance = 50.0;
+		distance = 50.0f;
 		angle = (Math.random()*2)*Math.PI;
 
 	}
@@ -74,7 +90,7 @@ class NormalParticle implements Particle
 		
 		if(clock)
 		{
-			angle -= 0.04;
+			angle -= 0.04f;
 			if(centerX < 250 && centerY == 50)
 			{
 				centerX+=2;
@@ -95,7 +111,7 @@ class NormalParticle implements Particle
 		}
 		else if(!clock)
 		{
-			angle += 0.04;
+			angle += 0.04f;
 			if(centerX < 250 && centerY == 250)
 			{
 				centerX+=2;
@@ -122,14 +138,14 @@ class NormalParticle implements Particle
 		{
 			stroke(255);
 			fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-			ellipse((float)x, (float)y, 10.0, 10.0);
+			ellipse((float)x, (float)y, 10.0f, 10.0f);
 		}
 		else 
 		{
 			stroke(0);
 			fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-			ellipse((float)x+((float)(Math.random()*7)-3), (float)y+((float)(Math.random()*7)-3), 5.0, 5.0);
-			ellipse((float)x-((float)(Math.random()*7)-3), (float)y-((float)(Math.random()*7)-3), 5.0, 5.0);
+			ellipse((float)x+((float)(Math.random()*7)-3), (float)y+((float)(Math.random()*7)-3), 5.0f, 5.0f);
+			ellipse((float)x-((float)(Math.random()*7)-3), (float)y-((float)(Math.random()*7)-3), 5.0f, 5.0f);
 		}
 	}
 }
@@ -147,17 +163,17 @@ class OddballParticle implements Particle
 	{
 		centerX = 120;
 		centerY = 170;
-		distance = 13.0;
+		distance = 13.0f;
 		angle = (Math.random()*2)*Math.PI;
 	}
 	public void move()
 	{
 		x = centerX + Math.cos(angle)*distance;
 		y = centerY + Math.sin(angle)*distance;
-		angle += 0.055;
+		angle += 0.055f;
 		if(!clock)
 		{
-			angle -= 0.04;
+			angle -= 0.04f;
 			if(centerX < 180 && centerY == 120)
 			{
 				centerX+=2;
@@ -178,7 +194,7 @@ class OddballParticle implements Particle
 		}
 		else
 		{
-			angle += 0.04;
+			angle += 0.04f;
 			if(centerX < 180 && centerY == 180)
 			{
 				centerX+=2;
@@ -210,8 +226,8 @@ class OddballParticle implements Particle
 		{
 			stroke(0);
 			fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-			ellipse((float)x+((float)(Math.random()*3)-1), (float)y+((float)(Math.random()*3)-1), 3.75, 3.75);
-			ellipse((float)x-((float)(Math.random()*3)-1), (float)y-((float)(Math.random()*3)-1), 3.75, 3.75);
+			ellipse((float)x+((float)(Math.random()*3)-1), (float)y+((float)(Math.random()*3)-1), 3.75f, 3.75f);
+			ellipse((float)x-((float)(Math.random()*3)-1), (float)y-((float)(Math.random()*3)-1), 3.75f, 3.75f);
 		}
 	}
 }
@@ -219,3 +235,12 @@ class OddballParticle implements Particle
 
 
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "Starfield" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
