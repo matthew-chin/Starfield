@@ -36,6 +36,7 @@ public void setup()
 			chubz[i] = new OddballParticle();
 		}
 	}
+	chubz[normLength-1] = new Jumbo();
 	/*chubz[normLength-3] = new OddballParticle();
 	chubz[normLength-2] = new OddballParticle();
 	chubz[normLength-1] = new OddballParticle();*/
@@ -45,7 +46,7 @@ public void draw()
 {
 	//background(0);
 	//ellipse(150, 150, 200, 200);
-	for (int i = 0; i < normLength-1; ++i) 
+	for (int i = 0; i < normLength; ++i) 
 	{
 		chubz[i].move();
 		chubz[i].show();
@@ -74,12 +75,14 @@ public void keyPressed()
 
 class NormalParticle implements Particle
 {
-	double x, y, distance, angle, centerX, centerY;
+	double x, y, distance, angle, centerX, centerY, siz1, siz2;
 	NormalParticle()
 	{
 		centerX = 150;
 		centerY = 250;
 		distance = 50.0f;
+		siz1 = 10.0f;
+		siz2 = 5.0f;
 		angle = (Math.random()*2)*Math.PI;
 
 	}
@@ -138,14 +141,14 @@ class NormalParticle implements Particle
 		{
 			stroke(255);
 			fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-			ellipse((float)x, (float)y, 10.0f, 10.0f);
+			ellipse((float)x, (float)y, (float)siz1, (float)siz1);
 		}
 		else 
 		{
 			stroke(0);
 			fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-			ellipse((float)x+((float)(Math.random()*7)-3), (float)y+((float)(Math.random()*7)-3), 5.0f, 5.0f);
-			ellipse((float)x-((float)(Math.random()*7)-3), (float)y-((float)(Math.random()*7)-3), 5.0f, 5.0f);
+			ellipse((float)x+((float)(Math.random()*7)-3), (float)y+((float)(Math.random()*7)-3), (float)siz2, (float)siz2);
+			ellipse((float)x-((float)(Math.random()*7)-3), (float)y-((float)(Math.random()*7)-3), (float)siz2, (float)siz2);
 		}
 	}
 }
@@ -158,12 +161,13 @@ interface Particle
 
 class OddballParticle implements Particle
 {
-	double x, y, distance, angle, centerX, centerY;
+	double x, y, distance, angle, centerX, centerY, siz;
 	OddballParticle()
 	{
 		centerX = 120;
 		centerY = 170;
 		distance = 13.0f;
+		siz = 3.75f;
 		angle = (Math.random()*2)*Math.PI;
 	}
 	public void move()
@@ -226,13 +230,20 @@ class OddballParticle implements Particle
 		{
 			stroke(0);
 			fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-			ellipse((float)x+((float)(Math.random()*3)-1), (float)y+((float)(Math.random()*3)-1), 3.75f, 3.75f);
-			ellipse((float)x-((float)(Math.random()*3)-1), (float)y-((float)(Math.random()*3)-1), 3.75f, 3.75f);
+			ellipse((float)x+((float)(Math.random()*3)-1), (float)y+((float)(Math.random()*3)-1), (float)siz, (float)siz);
+			ellipse((float)x-((float)(Math.random()*3)-1), (float)y-((float)(Math.random()*3)-1), (float)siz, (float)siz);
 		}
 	}
 }
 
-
+class Jumbo extends NormalParticle
+{
+Jumbo()
+{
+siz1 = 40.0f;
+siz2 = 20.0f;
+}
+}
 
 
   static public void main(String[] passedArgs) {
